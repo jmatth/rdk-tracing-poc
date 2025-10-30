@@ -1,0 +1,17 @@
+[tools]
+go = "1.25.3"
+jq = "1.8.1"
+
+[vars]
+part_id = "{{ exec(command='jq .cloud.id cfg.json') }}"
+
+[tasks.run-server]
+dir = "{{ config_root }}/rdk"
+run = 'go run ./web/cmd/server -config ../cfg.json'
+
+[tasks.run-jaeger]
+run = '(docker run --rm --name jaeger -p 16686:16686 -p 4317:4317 -p 4318:4318 -p 5778:5778 -p 9411:9411 cr.jaegertracing.io/jaegertracing/jaeger:2.11.0)'
+
+[tasks.import-traces]
+dir = "{{ config_root }}/rdk"
+run = 'go run ./cli/viam machine part import-traces --part {{ vars.part_id }}'
