@@ -1,0 +1,9 @@
+[submodule "rdk"]
+	path = rdk
+	url = git@github.com:jmatth/rdk.git
+[submodule "goutils"]
+	path = goutils
+	url = git@github.com:jmatth/goutils.git
+[submodule "api"]
+	path = api
+	url = git@github.com:jmatth/api.git
