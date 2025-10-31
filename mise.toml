@@ -5,6 +5,9 @@ jq = "1.8.1"
 [vars]
 part_id = "{{ exec(command='jq .cloud.id cfg.json') }}"
 
+[tasks.fetch-submodules]
+run = 'git submodule update --init --recursive'
+
 [tasks.run-server]
 dir = "{{ config_root }}/rdk"
 run = 'go run ./web/cmd/server -config ../cfg.json'
